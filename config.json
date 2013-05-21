@@ -1,3 +1,7 @@
 {
-  "port": 3001
+  "port": 8004
+, "host": null
+, "environment": "production"
+, "logDir": null
+, "uid": null
 }

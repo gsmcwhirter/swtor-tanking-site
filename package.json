@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "description": "Site for SW:TOR tanking optimization",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  , "install": "make all"
-  , "start": "node server"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "make all",
+    "start": "node run.js"
   },
   "repository": "",
   "author": "Gregory McWhirter",
@@ -16,6 +16,7 @@
     "swtor-tanking": "https://github.com/swtor-apps/swtor-tanking/archive/master.tar.gz",
     "stylus": "~0.32.1",
     "component": "~0.16.0",
-    "jade": "~0.30.0"
+    "jade": "~0.30.0",
+    "forever-monitor": "~1.2.2"
   }
 }

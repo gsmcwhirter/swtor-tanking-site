@@ -9,6 +9,9 @@
     "visionmedia/page.js": "*",
     "cristiandouce/loading-lock": "*",
     "component/dom": "*",
+    "component/each": "*",
+    "component/json": "*",
+    "component/json-fallback": "*",
     "necolas/normalize.css": "*"
   },
   "development": {},

@@ -45,8 +45,7 @@ else {
   app.get('/:file(*)', function(req, res, next){
     var file = req.params.file;
     if (!file) return next();
-    var name = req.params.example;
-    var path = join(__dirname, "static", name, file);
+    var path = join(__dirname, "static", file);
     fs.stat(path, function(err, stat){
       if (err) return next();
       res.sendfile(path);
@@ -55,8 +54,7 @@ else {
 
   // redir / to index.html
   app.get('/*', function(req, res){
-    var name = req.params.example;
-    res.sendfile(join(__dirname, "static", name, 'index.html'));
+    res.sendfile(join(__dirname, "static", 'index.html'));
   });
   
   app.post('/api/optimize', function (req, res){

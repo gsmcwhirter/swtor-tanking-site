@@ -1,0 +1,38 @@
+extend layout
+
+block append content
+  #everything
+    #entry
+      h2 Current Stats
+      form
+        fieldset
+          label(for='class') Class
+          select#class(name="class", size=1)
+            option(val='shadow') Shadow/Assassin
+            option(val='vanguard') Vanguard/Powertech
+            option(val='guardian') Guardian/Juggernaut
+          
+          label(for='defRating') Defense Rating
+          input#defRating(name='defRating', type="number", min=0, max=10000, increment=1, value=0)
+          
+          label(for='shieldRating') Shield Rating
+          input#shieldRating(name='shieldRating', type="number", min=0, max=10000, increment=1, value=0)
+          
+          label(for='absorbRating') Absorb Rating
+          input#absorbRating(name='absorbRating', type="number", min=0, max=10000, increment=1, value=0)
+          
+          label(for='armorRating') Armor Rating
+          input#armorRating(name='armorRating', type="number", min=0, max=20000, increment=1, value=0)
+          
+          label(for='stim') Stim
+          select#stim(name="stim", size=1)
+            option(val='proto_nano') Prototype Nano-infused Fortitude Stim
+            option(val='reuse_nano') Reusable Nano-infused Fortitude Stim
+            
+          .pseudo-label
+          button#process.pos(type="button") Optimize...
+          button#clear.neg(type="button") Clear
+            
+    #results
+      h2 Optimized Stats
+      #actual_results

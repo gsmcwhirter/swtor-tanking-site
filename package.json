@@ -1,0 +1,21 @@
+{
+  "name": "swtor-tanking-site",
+  "version": "0.0.1",
+  "description": "Site for SW:TOR tanking optimization",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  , "install": "make all"
+  , "start": "node server"
+  },
+  "repository": "",
+  "author": "Gregory McWhirter",
+  "license": "MIT",
+  "readmeFilename": "Readme.md",
+  "dependencies": {
+    "express": "~3.2.4",
+    "swtor-tanking": "https://github.com/swtor-apps/swtor-tanking/archive/master.tar.gz",
+    "stylus": "~0.32.1",
+    "component": "~0.16.0",
+    "jade": "~0.30.0"
+  }
+}

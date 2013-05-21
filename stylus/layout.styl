@@ -1,22 +1,245 @@
+link_color = #a75416
+background = #a60
+background2 = #530
+lightbase = #fff
+lightbase2 = #eee
+lightborder = #ccc
+medborder = #888
+medbase = #aaa
+
 body, html
   width 100%
   height 100%
   padding 0
   margin 0
+  text-align center
+  
+html
+  background-color background2
+  
+body
+  margin-top -15px
+  font-family Verdana,Arial,Helvetica,sans-serif
+  padding 10px 0
+  background -moz-linear-gradient(top, background, background2)
+  background -webkit-gradient(linear, 0 0, 0 90%, from(background), to(background2))
+
+  background-color background2
+
+a
+  color link_color
+  text-decoration none
+
+a:hover
+  text-decoration underline
+  
+p, ul, ol
+{
+    margin-bottom: 1.5em;
+}
+
+ul,
+ul>li,
+ol,
+ol>li
+{
+    list-style-position: outside;
+}
+
+ul.bullets,
+ul.bullets>li
+{
+    list-style-type: circle;
+}
+
+ul.bullets ul.bullets,
+ul.bullets ul.bullets>li
+{
+    list-style-type: square;
+}
+
+ul.bullets ul.bullets ul.bullets,
+ul.bullets ul.bullets ul.bullets>li
+{
+    list-style-type: disc;
+}
+
+ol,
+ol>li,
+ol.decimal,
+ol.decimal>li
+{
+    list-style-type: decimal;
+}
+
+ol ol,
+ol ol>li,
+ol.Alpha,
+ol.Alpha>li
+{
+    list-style-type: upper-alpha;
+}
+
+ol ol ol,
+ol ol ol>li,
+ol.roman,
+ol.roman>li
+{
+    list-style-type: lower-roman;
+}
+
+ol ol ol ol,
+ol ol ol ol>li,
+ol.alpha,
+ol.alpha>li
+{
+    list-style-type: lower-alpha;
+}
+
+strong,
+.bold
+{
+    font-weight: bold;
+}
+
+.center
+{
+    text-align: center;
+}
+
+.small {
+    font-size: 85%;
+    margin-bottom: 0;
+}
+
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+.system {
+    color: green;
+    font-weight: bold;
+    font-style: italic;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 1px;
+    background-color: #fff;
+
+    th, td, caption {
+        padding: 4px 7px;
+    }
+
+    thead th {
+        background-color: #eee;
+        border-top: 2px solid #000;
+        border-bottom: 1px solid #888;
+    }
+
+    tbody {
+
+        tr td {
+            background-color: #fff;
+            border-bottom: 1px solid #aaa;
+        }
+
+        tr:nth-child(even) td,
+        tr.even td {
+            background-color: #eee;
+        }
+    }
+
+    tfoot tr td {
+        border-bottom: 2px solid #000;
+    }
+
+}
   
 #everything
+  margin 0 auto
+  text-align left
+  background-color transparent !important
+  
   width 84%
-  margin-left 15%
-  margin-top 2%
+  padding 0
+  
+#head
+  padding 1em 0
+  -moz-box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.5);
+  
+  background-color lightbase !important
+  border: 1px solid #ccc;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  -moz-border-top-left-radius: 0;
+  -moz-border-top-right-radius: 0;
+  -webkit-border-top-left-radius: 0;
+  -webkit-border-top-right-radius: 0;
+
+  border-top: none;
+  
+  h1
+    font-family: 'FontinSansSmallCaps', sans-serif;
+    text-shadow: #aaa 1px 1px 5px;
+    font-size: 60px;
+    line-height: 1em;
+    color: link_color;
+    padding: 0;
+    margin: 0 15px 5px;
+  
+  nav
+    margin-left 2em
+    
+    ol
+      list-style none
+      overflow auto
+      margin 0
+      padding 0
+      
+      li
+        float left
+        margin-right 10px
+  
+#body
+  -moz-box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.5);
+  overflow: auto;
+  padding: 10px 0;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  
+  background-color: lightbase;
+  
+  border: 1px solid #ccc;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+
+#about
+  padding 0 2em
+  
+  h2
+    margin-left -0.5em
   
 #entry
-  width 40%
+  margin-left 1em
+  width 45%
   border-right 1px solid #ccc
   float left
   
 #results
   margin-left 5%
-  width 40%
+  width 45%
   float left
   
 fieldset
@@ -65,6 +288,7 @@ span.label
   margin-top 10px
   
 span.value
+  margin-left 5px
   display block
   float left
   width 55%
@@ -76,25 +300,38 @@ span.add
 span.sub
   color #800
   
-nav
-  margin-left -15%
-  border-bottom 1px solid #ccc
-  padding 2px 0
-  
-  ol
-    list-style none
-    overflow auto
-    margin 0
-    padding 0
-    margin-left 13%
-    
-    li
-      float left
-      margin-right 10px
-      
-      a
-        color #008
-        text-decoration none
-      
-      a:hover
-        text-decoration underline
+h1, h2, h3, h4, h5 {
+    font-family: 'FontinSansSmallCaps', sans-serif;
+    margin-bottom: .5em;
+}
+h1 {
+    color: #222;
+    font-size: 182%;
+}
+
+h2 {
+    padding-bottom: 5px;
+    line-height: 1em;
+    color: #444;
+    font-size: 167%;
+}
+h3 {
+    color: #666;
+    font-size: 153.9%;
+}
+
+@font-face {
+    font-family: 'FontinSansSmallCaps';
+    src: url('/fonts/fontin_sans_sc_45b-webfont.eot');
+    src: local('☺'), url('/fonts/fontin_sans_sc_45b-webfont.woff') format('woff'), url('/fonts/fontin_sans_sc_45b-webfont.ttf') format('truetype'), url('/fonts/fontin_sans_sc_45b-webfont.svg#webfontFZcdVJKv') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'RalewayThin';
+    src: url('/fonts/raleway_thin-webfont.eot');
+    src: local('☺'), url('/fonts/raleway_thin-webfont.woff') format('woff'), url('/fonts/raleway_thin-webfont.ttf') format('truetype'), url('/fonts/raleway_thin-webfont.svg#webfontsVpRIgRb') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}

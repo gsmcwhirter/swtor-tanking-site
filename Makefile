@@ -1,6 +1,7 @@
 all: build static/js static/css
 	cp build/build.js static/js/build.js
 	cp build/build.css static/css/build.css
+	cp -r fonts static/
 
 build: components static static/index.html stylus/layout.css
 	@./node_modules/component/bin/component build

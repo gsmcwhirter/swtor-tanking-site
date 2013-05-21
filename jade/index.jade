@@ -2,121 +2,126 @@ extend layout
 
 block append content
   #everything
-    nav#nav
-      ol
-        li
-          a(href="/") Optimizer
-        li |
-        li
-          a(href="/about") About the Optimizer
-    #main
-      #entry
-        h2 Current Stats
-        form(method="POST", action="/api/optimize", onsubmit="return false;")
-          fieldset
-            label(for='class') Class
-            select#class(name="class", size=1)
-              option(value='shadow') Shadow/Assassin
-              option(value='vanguard') Vanguard/Powertech
-              option(value='guardian') Guardian/Juggernaut
-            
-            label(for='defRating') Defense Rating
-            input#defRating(name='defRating', type="number", min=0, max=10000, increment=1, value=0)
-            
-            label(for='shieldRating') Shield Rating
-            input#shieldRating(name='shieldRating', type="number", min=0, max=10000, increment=1, value=0)
-            
-            label(for='absorbRating') Absorb Rating
-            input#absorbRating(name='absorbRating', type="number", min=0, max=10000, increment=1, value=0)
-            
-            label(for='armorRating') Armor Rating
-            input#armorRating(name='armorRating', type="number", min=0, max=20000, increment=1, value=0)
-            
-            //label(for='relic1') Relic 1
-            //select#relic1(name='relic1', size=1)
-            //  option(val='')
-            
-            //label(for='relic2') Relic 2
-            //select#relic2(name='relic2', size=1)
-            //  option(val='')
-            
-            label(for='stim') Stim
-            select#stim(name="stim", size=1)
-              option(value='proto_nano') Prototype Nano-infused Fortitude Stim
-              option(value='reuse_nano') Reusable Nano-infused Fortitude Stim
-              option(value='none') No Stim
+    #head
+      h1 Tor-Tank.com
+      nav#nav
+        ol
+          li
+            a(href="/") Optimizer
+          li |
+          li
+            a(href="/about") About the Optimizer
+  
+    #body
+      #main
+        #entry
+          h2 Current Stats
+          form(method="POST", action="/api/optimize", onsubmit="return false;")
+            fieldset
+              label(for='class') Class
+              select#class(name="class", size=1)
+                option(value='shadow') Shadow/Assassin
+                option(value='vanguard') Vanguard/Powertech
+                option(value='guardian') Guardian/Juggernaut
               
-            .pseudo-label
-            button#process.pos(type="submit") Optimize...
-            button#clear.neg(type="button") Clear
+              label(for='defRating') Defense Rating
+              input#defRating(name='defRating', type="number", min=0, max=10000, increment=1, value=0)
               
-      #results
-        h2 Optimized Stats
-        #actual_results
-          span.label Defense Rating:
-          span.value#defRatingValue
-          
-          span.label Shield Rating:
-          span.value#shieldRatingValue
-          
-          span.label Absorb Rating:
-          span.value#absorbRatingValue
-          
-          span.label Defense % (no stim):
-          span.value#defPctNS
-          
-          span.label Defense % (stim):
-          span.value#defPctS
-          
-          span.label Shield %:
-          span.value#shieldPct
-          
-          span.label Absorb %:
-          span.value#absorbPct
-    
-    #about
-      h2 About the Optimization
-      p
-        | The optimizations done here are for level 55 tanks only.
-      p
-        | The optimizations are done by a random sampling of
-        | the possible space of stat distributions that a tank could
-        | achieve. Due to the random factor, repeated optimizations may
-        | present slightly different results. The differences, however
-        | should be negligible.
-      p
-        | The optimization is for mitigation only. At this time, there
-        | are no concerns for health pool, self-healing, or anything of
-        | that sort. In the future, that should hopefully change.
-      p
-        | Relics are also not currently integrated into the optimization,
-        | though efforts to do so are underway.
-      p
-        | Certain assumptions are made about the combat to calculate the
-        | mitigation score:
-      ol
-        li Approximately 71% of attacks are defendable (Kinetic and Energy), and 21% of attacks are resistable (Internal and Elemental).
-        li Of the defendable attacks, half are at 90% accuracy, and the other half are at 100%. All resistable attacks are at 100% accuracy.
-        li Procs and abilities (not from relics) are assumed to be used optimally (on every cooldown, except for things like Kinetic Ward), and the mitigation is an average score over an entire fight.
-        li Shield ratings are bounded above and below as percentages of the stat budget, as they do not trade off against defense or absorb.
-      p
-        | Certain data used here has been generated by others. I would
-        | like to, in particular, recognize the users of&#32;
-        a(href="http://mmo-mechanics.com/") MMO Mechanics
-        |  for working out the diminishing returns formulas for the tank
-        | stats, and to KeyboardNinja on the SW:TOR forums for&#32; 
-        a(href="http://www.swtor.com/community/showthread.php?t=616779") his post
-        |  that inspired me to work on this and for determining the
-        | shield rating bounds and damage type distribution.
-      p
-        | This entire work is open source and available under the MIT 
-        | license. The optimizer is available at&#32;
-        a(href="https://github.com/swtor-apps/swtor-tanking") https://github.com/swtor-apps/swtor-tanking
-        |  and the source for this website is available at&#32;
-        a(href="https://github.com/swtor-apps/swtor-tanking-site") https://github.com/swtor-apps/swtor-tanking-site
-        | . Contributions are always welcome, especially to improve
-        | the optimizations. Please feel free to file an issue on one
-        | of those projects or, even better, send a pull request.
+              label(for='shieldRating') Shield Rating
+              input#shieldRating(name='shieldRating', type="number", min=0, max=10000, increment=1, value=0)
+              
+              label(for='absorbRating') Absorb Rating
+              input#absorbRating(name='absorbRating', type="number", min=0, max=10000, increment=1, value=0)
+              
+              label(for='armorRating') Armor Rating
+              input#armorRating(name='armorRating', type="number", min=0, max=20000, increment=1, value=0)
+              
+              //label(for='relic1') Relic 1
+              //select#relic1(name='relic1', size=1)
+              //  option(val='')
+              
+              //label(for='relic2') Relic 2
+              //select#relic2(name='relic2', size=1)
+              //  option(val='')
+              
+              label(for='stim') Stim
+              select#stim(name="stim", size=1)
+                option(value='proto_nano') Prototype Nano-infused Fortitude Stim
+                option(value='reuse_nano') Reusable Nano-infused Fortitude Stim
+                option(value='none') No Stim
+                
+              .pseudo-label
+              button#process.pos(type="submit") Optimize...
+              button#clear.neg(type="button") Clear
+                
+        #results
+          h2 Optimized Stats
+          #actual_results
+            span.label Defense Rating:
+            span.value#defRatingValue
+            
+            span.label Shield Rating:
+            span.value#shieldRatingValue
+            
+            span.label Absorb Rating:
+            span.value#absorbRatingValue
+            
+            span.label Defense % (no stim):
+            span.value#defPctNS
+            
+            span.label Defense % (stim):
+            span.value#defPctS
+            
+            span.label Shield %:
+            span.value#shieldPct
+            
+            span.label Absorb %:
+            span.value#absorbPct
+      
+      #about
+        h2 About the Optimizer
+        p
+          | The optimizations done here are for level 55 tanks only.
+        p
+          | The optimizations are done by a random sampling of
+          | the possible space of stat distributions that a tank could
+          | achieve. Due to the random factor, repeated optimizations may
+          | present slightly different results. The differences, however
+          | should be negligible.
+        p
+          | The optimization is for mitigation only. At this time, there
+          | are no concerns for health pool, self-healing, or anything of
+          | that sort. In the future, that should hopefully change.
+        p
+          | Relics are also not currently integrated into the optimization,
+          | though efforts to do so are underway.
+        p
+          | Certain assumptions are made about the combat to calculate the
+          | mitigation score:
+        ol
+          li Approximately 71% of attacks are defendable (Kinetic and Energy), and 21% of attacks are resistable (Internal and Elemental).
+          li Of the defendable attacks, half are at 90% accuracy, and the other half are at 100%. All resistable attacks are at 100% accuracy.
+          li Procs and abilities (not from relics) are assumed to be used optimally (on every cooldown, except for things like Kinetic Ward), and the mitigation is an average score over an entire fight.
+          li Shield ratings are bounded above and below as percentages of the stat budget, as they do not trade off against defense or absorb.
+        p
+          | Certain data used here has been generated by others. I would
+          | like to, in particular, recognize the users of&#32;
+          a(href="http://mmo-mechanics.com/") MMO Mechanics
+          |  for working out the diminishing returns formulas for the tank
+          | stats, and to KeyboardNinja on the SW:TOR forums for&#32; 
+          a(href="http://www.swtor.com/community/showthread.php?t=616779") his post
+          |  that inspired me to work on this and for determining the
+          | shield rating bounds and damage type distribution.
+        p
+          | This entire work is open source and available under the MIT 
+          | license. The optimizer is available at&#32;
+          a(href="https://github.com/swtor-apps/swtor-tanking") https://github.com/swtor-apps/swtor-tanking
+          |  and the source for this website is available at&#32;
+          a(href="https://github.com/swtor-apps/swtor-tanking-site") https://github.com/swtor-apps/swtor-tanking-site
+          | . Contributions are always welcome, especially to improve
+          | the optimizations. Please feel free to file an issue on one
+          | of those projects or, even better, send a pull request.
+      .dummy(style="clear:both; height: 1px;")
 
 block js
   script(type="text/javascript")

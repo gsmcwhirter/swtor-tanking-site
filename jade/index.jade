@@ -36,13 +36,45 @@ block append content
               label(for='armorRating') Armor Rating
               input#armorRating(name='armorRating', type="number", min=0, max=20000, increment=1, value=0)
               
-              //label(for='relic1') Relic 1
-              //select#relic1(name='relic1', size=1)
-              //  option(val='')
+              label(for='relic1') Relic 1
+              select#relic1(name='relic1', size=1)
+                option(value='none') None / Other
+                optgroup(label="Arkanian")
+                  option(value='arkanian:redoubt') Arkanian Relic of Fortunate Redoubt
+                  option(value='arkanian:shield_amp') Arkanian Relic of Shield Amplification
+                  option(value='arkanian:imperiling') Arkanian Relic of Imperiling Severity
+                  option(value='arkanian:shrouded') Arkanian Relic of the Shrouded Crusader
+                optgroup(label="Underworld")
+                  option(value='underworld:redoubt') Underworld Relic of Fortunate Redoubt
+                  option(value='underworld:shield_amp') Underworld Relic of Shield Amplification
+                  option(value='underworld:imperiling') Underworld Relic of Imperiling Severity
+                  option(value='underworld:shrouded') Underworld Relic of the Shrouded Crusader
+                optgroup(label="Partisan")
+                  option(value='partisan:redoubt') Partisan Relic of Fortunate Redoubt
+                  option(value='partisan:shield_amp') Partisan Relic of Shield Amplification
+                optgroup(label="Conqueror")
+                  option(value='conqueror:redoubt') Conqueror Relic of Fortunate Redoubt
+                  option(value='conqueror:shield_amp') Conqueror Relic of Shield Amplification
               
-              //label(for='relic2') Relic 2
-              //select#relic2(name='relic2', size=1)
-              //  option(val='')
+              label(for='relic2') Relic 2
+              select#relic2(name='relic2', size=1)
+                option(value='none') None / Other
+                optgroup(label="Arkanian")
+                  option(value='arkanian:redoubt') Arkanian Relic of Fortunate Redoubt
+                  option(value='arkanian:shield_amp') Arkanian Relic of Shield Amplification
+                  option(value='arkanian:imperiling') Arkanian Relic of Imperiling Severity
+                  option(value='arkanian:shrouded') Arkanian Relic of the Shrouded Crusader
+                optgroup(label="Underworld")
+                  option(value='underworld:redoubt') Underworld Relic of Fortunate Redoubt
+                  option(value='underworld:shield_amp') Underworld Relic of Shield Amplification
+                  option(value='underworld:imperiling') Underworld Relic of Imperiling Severity
+                  option(value='underworld:shrouded') Underworld Relic of the Shrouded Crusader
+                optgroup(label="Partisan")
+                  option(value='partisan:redoubt') Partisan Relic of Fortunate Redoubt
+                  option(value='partisan:shield_amp') Partisan Relic of Shield Amplification
+                optgroup(label="Conqueror")
+                  option(value='conqueror:redoubt') Conqueror Relic of Fortunate Redoubt
+                  option(value='conqueror:shield_amp') Conqueror Relic of Shield Amplification
               
               label(for='stim') Stim
               select#stim(name="stim", size=1)
@@ -77,6 +109,9 @@ block append content
             
             span.label Absorb %:
             span.value#absorbPct
+            
+            span.label Mitigation %:
+            span.value#mitigationPct
       
       #about
         h2 About the Optimizer
@@ -93,11 +128,17 @@ block append content
           | are no concerns for health pool, self-healing, or anything of
           | that sort. In the future, that should hopefully change.
         p
-          | Relics are also not currently integrated into the optimization,
-          | though efforts to do so are underway.
+          | Relics are assumed to proc at their mean rate, adjusting for
+          | the internal cooldowns and/or are used on every cooldown.
+          | PvE proc relics are assumed not to stack with each other,
+          | and at the moment, only the relic entered in slot 1 is
+          | counted if two proc relics are entered. PvP proc relics are
+          | assumed to stack with PvE proc relics. Click relics are 
+          | also assumed to share a cooldown, and only the relic entered
+          | in slot 1 is counted.
         p
-          | Certain assumptions are made about the combat to calculate the
-          | mitigation score:
+          | Certain assumptions are made about the combat to calculate 
+          | the mitigation score:
         ol
           li Approximately 71% of attacks are defendable (Kinetic and Energy), and 21% of attacks are resistable (Internal and Elemental).
           li Of the defendable attacks, half are at 90% accuracy, and the other half are at 100%. All resistable attacks are at 100% accuracy.

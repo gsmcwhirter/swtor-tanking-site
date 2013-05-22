@@ -60,6 +60,8 @@ else {
   app.post('/api/optimize', function (req, res){
     var data_keys = [ 'class'
                     , 'stim'
+                    , 'relic1'
+                    , 'relic2'
                     ]
       , nume_keys = [ 'defRating'
                     , 'shieldRating'
@@ -84,14 +86,35 @@ else {
       error_msgs.push("Stim value was not expected.");
     }
     
-    //TODO: add relic support here
+    var relicData = {
+      numRelics: 2
+    , relic1: null
+    , relic2: null
+    };
+    
+    (['relic1', 'relic2']).forEach(function (relic){
+      if (req.body[relic] === "none"){
+        relicData.numRelics--;
+      }
+      else {
+        var parts = req.body[relic].split(':');
+        if (!sto.relicData[parts[0]][parts[1]]){
+          relicData.numRelics--;
+        }
+        else if (!relicData.relic1){
+          relicData.relic1 = sto.relicData[parts[0]][parts[1]];
+        }
+        else {
+          relicData.relic2 = sto.relicData[parts[0]][parts[1]];
+        }
+      }
+    });
     
     nume_keys.forEach(function (key){
       if (req.body[key] && !isIntNumber(req.body[key]) && parseFloat(req.body[key]) > 0){
         error_msgs.push(key + " must be a non-negative integer value.");
       }
     });
-    
     
     res.set('Content-type', 'application/json')
     if (error_msgs.length) {
@@ -113,7 +136,7 @@ else {
         stimValue = 63;
       }
       
-      sto.optimizer.optimize(sto.otherData, sto.classData[req.body['class']], statBudget, parseFloat(req.body['armorRating']), stimValue, function (err, result){
+      sto.optimizer.optimize(sto.otherData, sto.classData[req.body['class']], relicData, statBudget, parseFloat(req.body['armorRating']), stimValue, function (err, result){
         if (err){
           res.send({error: err});
         }

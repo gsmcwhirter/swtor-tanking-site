@@ -59,6 +59,8 @@ module.exports = function run(){
     
     var klass = dom("#class").els[0];
     var stim = dom("#stim").els[0];
+    var relic1 = dom("#relic1").els[0];
+    var relic2 = dom("#relic2").els[0];
         
     var data = {
       'class': klass.options[klass.selectedIndex].value
@@ -67,6 +69,8 @@ module.exports = function run(){
     , 'shieldRating': formatIntNumber(dom("#shieldRating").els[0].value)
     , 'absorbRating': formatIntNumber(dom("#absorbRating").els[0].value)
     , 'armorRating': formatIntNumber(dom("#armorRating").els[0].value)
+    , 'relic1': relic1.options[relic1.selectedIndex].value
+    , 'relic2': relic2.options[relic2.selectedIndex].value
     };
     
     request.post("/api/optimize")
@@ -102,6 +106,7 @@ module.exports = function run(){
                 dom("#actual_results #defPctS").els[0].innerHTML = Math.floor(results.defPctNB * 10000) / 100 + "%";
                 dom("#actual_results #shieldPct").els[0].innerHTML = Math.floor(results.shieldPctNB * 10000) / 100 + "%";
                 dom("#actual_results #absorbPct").els[0].innerHTML = Math.floor(results.absorbPctNB * 10000) / 100 + "%";
+                dom("#actual_results #mitigationPct").els[0].innerHTML = Math.floor(results.mitigation * 10000) / 100 + "%";
               }
            });
   });

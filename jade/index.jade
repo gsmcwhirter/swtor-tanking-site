@@ -164,8 +164,9 @@ block append content
           | Certain assumptions are made about the combat to calculate 
           | the mitigation score:
         ol
-          li Approximately 71% of attacks are defendable (Kinetic and Energy), and 21% of attacks are resistable (Internal and Elemental).
+          li Approximately 78& of attacks are defendable (Melee and Ranged with damage type Kinetic and Energy), 22% of attacks are resistable (Internal and Elemental).
           li Of the defendable attacks, half are at 90% accuracy, and the other half are at 100%. All resistable attacks are at 100% accuracy.
+          li Of the resistable attacks, 20.7% of the 22% are Kinetic and Energy, while 1.3% of the 22% are Internal and Elemental. 
           li Procs and abilities (not from relics) are assumed to be used optimally (on every cooldown, except for things like Kinetic Ward), and the mitigation is an average score over an entire fight.
           li Shield ratings are bounded above and below as percentages of the stat budget, as they do not trade off against defense or absorb.
         p
@@ -173,9 +174,12 @@ block append content
           | like to, in particular, recognize the users of&#32;
           a(href="http://mmo-mechanics.com/") MMO Mechanics
           |  for working out the diminishing returns formulas for the tank
-          | stats, and to KeyboardNinja on the SW:TOR forums for&#32; 
-          a(href="http://www.swtor.com/community/showthread.php?t=616779") his post
-          |  that inspired me to work on this and for determining the
+          | stats, and to dipstik and KeyboardNinja on the SW:TOR forums for&#32;
+          | their posts (
+          a(href="http://www.swtor.com/community/showthread.php?t=616779") KeyboardNinja
+          |  and&#32;
+          a(href="http://www.swtor.com/community/showthread.php?t=567164") dipstik 
+          | ) that inspired me to work on this and for determining the
           | shield rating bounds and damage type distribution.
         p
           | This entire work is open source and available under the MIT 

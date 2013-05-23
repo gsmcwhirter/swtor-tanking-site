@@ -144,13 +144,17 @@ table {
     tbody {
 
         tr td {
-            background-color: #fff;
+            background-color: #eee;
             border-bottom: 1px solid #aaa;
+        }
+        
+        tr:nth-child(1) td {
+            border-top 1px solid #aaa
         }
 
         tr:nth-child(even) td,
         tr.even td {
-            background-color: #eee;
+            background-color: #fff;
         }
     }
 
@@ -279,11 +283,31 @@ button.neg:hover
   color #ccc
   background-color #400
 
+#actual_results
+  table
+    width 100%
+    padding-top 15px
+    
+  td
+    padding 6px 7px
+    
+  td.label
+    font-weight bold
+    width 46%
+    
+  td.label + td
+    width 27%
+    text-align right
+    
+  td.label + td + td
+    width 27%
+    text-align right
+
 span.label
   font-weight bold
   display block
   float left
-  width 40%
+  width 45%
   clear left
   margin-top 10px
   
@@ -291,7 +315,7 @@ span.value
   margin-left 5px
   display block
   float left
-  width 55%
+  width 50%
   margin-top 10px
   
 span.add

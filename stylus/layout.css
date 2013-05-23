@@ -120,12 +120,15 @@ table thead th {
   border-bottom: 1px solid #888;
 }
 table tbody tr td {
-  background-color: #fff;
+  background-color: #eee;
   border-bottom: 1px solid #aaa;
+}
+table tbody tr:nth-child(1) td {
+  border-top: 1px solid #aaa;
 }
 table tbody tr:nth-child(even) td,
 table tbody tr.even td {
-  background-color: #eee;
+  background-color: #fff;
 }
 table tfoot tr td {
   border-bottom: 2px solid #000;
@@ -245,11 +248,30 @@ button.neg:hover {
   color: #ccc;
   background-color: #400;
 }
+#actual_results table {
+  width: 100%;
+  padding-top: 15px;
+}
+#actual_results td {
+  padding: 6px 7px;
+}
+#actual_results td.label {
+  font-weight: bold;
+  width: 46%;
+}
+#actual_results td.label + td {
+  width: 27%;
+  text-align: right;
+}
+#actual_results td.label + td + td {
+  width: 27%;
+  text-align: right;
+}
 span.label {
   font-weight: bold;
   display: block;
   float: left;
-  width: 40%;
+  width: 45%;
   clear: left;
   margin-top: 10px;
 }
@@ -257,7 +279,7 @@ span.value {
   margin-left: 5px;
   display: block;
   float: left;
-  width: 55%;
+  width: 50%;
   margin-top: 10px;
 }
 span.add {

@@ -82,31 +82,59 @@ module.exports = function run(){
                 //TODO: error handling
               }
               else {
-                //TODO: real display of results
-                var results = json.parse(res.text).result;
-                console.log(results);
+                var all_data = json.parse(res.text).result;
+                var results = all_data.after;
+                var prior = all_data.before;
                 
-                var ddiff = results.defRating - data.defRating;
+                var ddiff = results.defRating - prior.defRating;
                 var dclass = ddiff >= 0 ? 'add' : 'sub';
                 ddiff = "" + (ddiff >= 0 ? "+" : "") + ddiff;
                 
-                var sdiff = results.shieldRating - data.shieldRating;
+                var sdiff = results.shieldRating - prior.shieldRating;
                 var sclass = sdiff >= 0 ? 'add' : 'sub';
                 sdiff = "" + (sdiff >= 0 ? "+" : "") + sdiff;
                 
-                var adiff = results.absorbRating - data.absorbRating;
+                var adiff = results.absorbRating - prior.absorbRating;
                 var aclass = adiff >= 0 ? 'add' : 'sub';
                 adiff = "" + (adiff >= 0 ? "+" : "") + adiff;
                 
-                dom("#actual_results #defRatingValue").els[0].innerHTML = results.defRating + " (<span class='" + dclass + "'>" + ddiff + "</span>)";
-                dom("#actual_results #shieldRatingValue").els[0].innerHTML = results.shieldRating + " (<span class='" + sclass + "'>" + sdiff + "</span>)";
-                dom("#actual_results #absorbRatingValue").els[0].innerHTML = results.absorbRating + " (<span class='" + aclass + "'>" + adiff + "</span>)";
+                var defdiff1 = results.defPctNBNS - prior.defPctNBNS;
+                var defclass1 = defdiff1 >= 0 ? 'add' : 'sub';
+                defdiff1 = "" + (defdiff1 >= 0 ? "+" : "") + Math.floor(defdiff1 * 10000) / 100 + "%";
+                
+                var defdiff2 = results.defPctNB - prior.defPctNB;
+                var defclass2 = defdiff2 >= 0 ? 'add' : 'sub';
+                defdiff2 = "" + (defdiff2 >= 0 ? "+" : "") + Math.floor(defdiff2 * 10000) / 100 + "%";
+                
+                var spdiff = results.shieldPctNB - prior.shieldPctNB;
+                var spclass = spdiff >= 0 ? 'add' : 'sub';
+                spdiff = "" + (spdiff >= 0 ? "+" : "") + Math.floor(spdiff * 10000) / 100 + "%";
+                
+                var apdiff = results.absorbPctNB - prior.absorbPctNB;
+                var apclass = apdiff >= 0 ? 'add' : 'sub';
+                apdiff = "" + (apdiff >= 0 ? "+" : "") + Math.floor(apdiff * 10000) / 100 + "%";
+                
+                var mdiff = results.mitigation - prior.mitigation;
+                var mclass = mdiff >= 0 ? 'add' : 'sub';
+                mdiff = "" + (mdiff >= 0 ? "+" : "") + Math.floor(mdiff * 10000) / 100 + "%";
+                
+                dom("#actual_results #defRatingValue").els[0].innerHTML = results.defRating;
+                dom("#actual_results #defRatingDiff").els[0].innerHTML = "<span class='" + dclass + "'>" + ddiff + "</span>";
+                dom("#actual_results #shieldRatingValue").els[0].innerHTML = results.shieldRating;
+                dom("#actual_results #shieldRatingDiff").els[0].innerHTML = "<span class='" + sclass + "'>" + sdiff + "</span>";
+                dom("#actual_results #absorbRatingValue").els[0].innerHTML = results.absorbRating;
+                dom("#actual_results #absorbRatingDiff").els[0].innerHTML = "<span class='" + aclass + "'>" + adiff + "</span>";
                 
                 dom("#actual_results #defPctNS").els[0].innerHTML = Math.floor(results.defPctNBNS * 10000) / 100 + "%";
+                dom("#actual_results #defPctNSDiff").els[0].innerHTML = "<span class='" + defclass1 + "'>" + defdiff1 + "</span>";
                 dom("#actual_results #defPctS").els[0].innerHTML = Math.floor(results.defPctNB * 10000) / 100 + "%";
+                dom("#actual_results #defPctSDiff").els[0].innerHTML = "<span class='" + defclass2 + "'>" + defdiff2 + "</span>";
                 dom("#actual_results #shieldPct").els[0].innerHTML = Math.floor(results.shieldPctNB * 10000) / 100 + "%";
+                dom("#actual_results #shieldPctDiff").els[0].innerHTML = "<span class='" + spclass + "'>" + spdiff + "</span>";
                 dom("#actual_results #absorbPct").els[0].innerHTML = Math.floor(results.absorbPctNB * 10000) / 100 + "%";
+                dom("#actual_results #absorbPctDiff").els[0].innerHTML = "<span class='" + apclass + "'>" + apdiff + "</span>";
                 dom("#actual_results #mitigationPct").els[0].innerHTML = Math.floor(results.mitigation * 10000) / 100 + "%";
+                dom("#actual_results #mitigationPctDiff").els[0].innerHTML = "<span class='" + mclass + "'>" + mdiff + "</span>";
               }
            });
   });

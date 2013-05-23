@@ -113,29 +113,40 @@ block append content
         #results
           h2 Optimized Stats
           #actual_results
-            span.label Defense Rating:
-            span.value#defRatingValue
-            
-            span.label Shield Rating:
-            span.value#shieldRatingValue
-            
-            span.label Absorb Rating:
-            span.value#absorbRatingValue
-            
-            span.label Defense % (no stim):
-            span.value#defPctNS
-            
-            span.label Defense % (stim):
-            span.value#defPctS
-            
-            span.label Shield %:
-            span.value#shieldPct
-            
-            span.label Absorb %:
-            span.value#absorbPct
-            
-            span.label Mitigation %:
-            span.value#mitigationPct
+            table
+              tbody
+                tr
+                  td.label Defense Rating:
+                  td#defRatingValue
+                  td#defRatingDiff
+                tr
+                  td.label Shield Rating:
+                  td#shieldRatingValue
+                  td#shieldRatingDiff
+                tr
+                  td.label Absorb Rating:
+                  td#absorbRatingValue
+                  td#absorbRatingDiff
+                tr
+                  td.label Defense % (no stim):
+                  td#defPctNS
+                  td#defPctNSDiff
+                tr
+                  td.label Defense % (stim):
+                  td#defPctS
+                  td#defPctSDiff
+                tr
+                  td.label Shield %:
+                  td#shieldPct
+                  td#shieldPctDiff
+                tr
+                  td.label Absorb %:
+                  td#absorbPct
+                  td#absorbPctDiff
+                tr
+                  td.label Mitigation %:
+                  td#mitigationPct
+                  td#mitigationPctDiff
       
       #about
         h2 About the Optimizer

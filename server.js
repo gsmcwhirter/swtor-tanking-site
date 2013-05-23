@@ -123,10 +123,11 @@ else {
     }
     else {
       //try to optimize
-      var statBudget = 0;
-      statBudget += parseFloat(req.body['defRating']);
-      statBudget += parseFloat(req.body['shieldRating']);
-      statBudget += parseFloat(req.body['absorbRating']);
+      var startingStats = {
+        'startingDef': parseFloat(req.body['defRating'])
+      , 'startingShield': parseFloat(req.body['shieldRating'])
+      , 'startingAbsorb': parseFloat(req.body['absorbRating'])  
+      };
       
       var stimValue = 0;
       if (req.body['stim'] === "proto_nano"){
@@ -136,7 +137,7 @@ else {
         stimValue = 63;
       }
       
-      sto.optimizer.optimize(sto.otherData, sto.classData[req.body['class']], relicData, statBudget, parseFloat(req.body['armorRating']), stimValue, function (err, result){
+      sto.optimizer.optimize(sto.otherData, sto.classData[req.body['class']], relicData, startingStats, parseFloat(req.body['armorRating']), stimValue, function (err, result){
         if (err){
           res.send({error: err});
         }

@@ -4,8 +4,8 @@
   "description": "Site for SW:TOR tanking optimization",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "install": "make all",
-    "start": "node run.js"
+    "install": "npm install swtor-tanking --force && make all",
+    "start": "nohup node run.js"
   },
   "repository": "",
   "author": "Gregory McWhirter",

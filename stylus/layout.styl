@@ -254,9 +254,17 @@ label, .pseudo-label
   font-weight bold
   margin-top 10px
   
+label.no-block
+  display inline
+  margin-top auto
+  
 select, input
   padding 2px 5px
   width 80%
+  
+input[type=checkbox]
+  display inline
+  width auto
   
 button
   font-weight bold
@@ -324,25 +332,37 @@ span.add
 span.sub
   color #800
   
-h1, h2, h3, h4, h5 {
-    font-family: 'FontinSansSmallCaps', sans-serif;
-    margin-bottom: .5em;
-}
-h1 {
-    color: #222;
-    font-size: 182%;
-}
+h1, h2, h3, h4, h5
+  font-family: 'FontinSansSmallCaps', sans-serif;
+  margin-bottom: .5em;
 
-h2 {
-    padding-bottom: 5px;
-    line-height: 1em;
-    color: #444;
-    font-size: 167%;
-}
-h3 {
-    color: #666;
-    font-size: 153.9%;
-}
+h1
+  color: #222;
+  font-size: 182%;
+
+
+h2
+  padding-bottom: 5px;
+  line-height: 1em;
+  color: #444;
+  font-size: 167%;
+
+h3
+  color: #666;
+  font-size: 153.9%;
+
+ul#notifications
+  li
+    border-radius 10px
+    -moz-border-radius 10px
+    -webkit-border-radius 10px
+    -moz-box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.5);
+    -webkit-box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.5);
+    
+  li.error
+    background-color #400
+    color #eee
+    
 
 @font-face {
     font-family: 'FontinSansSmallCaps';

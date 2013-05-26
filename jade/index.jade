@@ -109,6 +109,30 @@ block append content
               .pseudo-label
               button#process.pos(type="submit") Optimize...
               button#clear.neg(type="button") Clear
+              
+            a.small#extraParams(href="/", onclick="return false;") Advanced Options...
+            #advancedOptions
+              fieldset(style="display: none;")
+                input#useAdvanced(type='checkbox', name='useAdvanced', value='yes') 
+                label.no-block(for='useAdvanced', style="margin-left: 5px;") Override advanced options 
+              
+                label(for='dmgMRKE') Melee/Ranged Kinetic Energy Damage Percent
+                input#dmgMRKE(type='number', name='dmgMRKE', min=0, max=1, increment=0.001, value=0) 
+                
+                label(for='dmgFTKE') Force/Tech Kinetic/Energy Damage Percent
+                input#dmgFTKE(type='number', name='dmgFTKE', min=0, max=1, increment=0.001, value=0)
+                
+                label(for='dmgFTIE') Force/Tech Internal/Elemental Damage Percent
+                input#dmgFTIE(type='number', name='dmgFTIE', min=0, max=1, increment=0.001, value=0)
+                
+                label(for='swingTime') Swing Timer
+                input#swingTime(type='number', name='swingTime', min=0, max=4, increment=0.01, value=0)
+              
+                label(for='shieldLow') Lower Bound on Shield Budget
+                input#shieldLow(type='number', name='shieldLow', min=0, max=1, increment=0.001, value=0)
+                
+                label(for='shieldHigh') Upper Bound on Shield Budget
+                input#shieldHigh(type='number', name='shieldHigh', min=0, max=1, increment=0.001, value=1)
                 
         #results
           h2 Optimized Stats

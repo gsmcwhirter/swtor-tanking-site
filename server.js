@@ -7,6 +7,7 @@ var cluster = require('cluster')
   , join = require('path').join
   , fs = require('fs')
   , sto = require('swtor-tanking')
+  , ce = require('cloneextend')
   ;
   
 var procs = process.env.procs || 1
@@ -42,21 +43,6 @@ else {
 
   // routes
   
-  app.get('/:file(*)', function(req, res, next){
-    var file = req.params.file;
-    if (!file) return next();
-    var path = join(__dirname, "static", file);
-    fs.stat(path, function(err, stat){
-      if (err) return next();
-      res.sendfile(path);
-    });
-  });
-
-  // redir / to index.html
-  app.get('/*', function(req, res){
-    res.sendfile(join(__dirname, "static", 'index.html'));
-  });
-  
   app.post('/api/optimize', function (req, res){
     var data_keys = [ 'class'
                     , 'stim'
@@ -86,6 +72,31 @@ else {
       error_msgs.push("Stim value was not expected.");
     }
     
+    var otherData = ce.clone(sto.otherData);
+    if (req.body['advanced']){
+      otherData = ce.extend(otherData, req.body['advanced']);
+      
+      for (var key in req.body['advanced']){
+        if (otherData.hasOwnProperty(key)){
+          otherData[key] = parseFloat(otherData[key]);
+        }
+      }
+    }
+    
+    if (Math.abs(otherData.dmgMRKE + otherData.dmgFTKE + otherData.dmgFTIE - 1.0) > 0.0000001){
+      error_msgs.push("Damage types do not add up correctly.");
+    }
+    else if (otherData.dmgMRKE < 0 || otherData.dmgFTKE < 0 || otherData.dmgFTIE < 0){
+      error_msgs.push("Damage type percentages must be non-negative.");
+    }
+    
+    if (otherData.shieldLow > otherData.shieldHigh){
+      error_msgs.push("Shield lower bound cannot be greater than the upper bound.");
+    }
+    else if (otherData.shieldLow < 0 || otherData.shieldHigh > 1){
+      error_msgs.push("Shield bounds must be values between 0 and 1.");
+    }
+    
     var relicData = {
       numRelics: 2
     , relic1: null
@@ -111,12 +122,13 @@ else {
     });
     
     nume_keys.forEach(function (key){
-      if (req.body[key] && !isIntNumber(req.body[key]) && parseFloat(req.body[key]) > 0){
+      if (req.body[key] && !(isIntNumber(req.body[key]) && parseFloat(req.body[key]) > 0)){
         error_msgs.push(key + " must be a non-negative integer value.");
       }
     });
     
-    res.set('Content-type', 'application/json')
+    res.set('Content-type', 'application/json');
+    
     if (error_msgs.length) {
       //errror in parameters
       res.send({error: error_msgs});
@@ -124,9 +136,9 @@ else {
     else {
       //try to optimize
       var startingStats = {
-        'startingDef': parseFloat(req.body['defRating'])
-      , 'startingShield': parseFloat(req.body['shieldRating'])
-      , 'startingAbsorb': parseFloat(req.body['absorbRating'])  
+        'startingDef': parseInt(req.body['defRating'], 10)
+      , 'startingShield': parseInt(req.body['shieldRating'], 10)
+      , 'startingAbsorb': parseInt(req.body['absorbRating'], 10)  
       };
       
       var stimValue = 0;
@@ -137,7 +149,7 @@ else {
         stimValue = 63;
       }
       
-      sto.optimizer.optimize(sto.otherData, sto.classData[req.body['class']], relicData, startingStats, parseFloat(req.body['armorRating']), stimValue, function (err, result){
+      sto.optimizer.optimize(otherData, sto.classData[req.body['class']], relicData, startingStats, parseInt(req.body['armorRating'], 10), stimValue, function (err, result){
         if (err){
           res.send({error: err});
         }
@@ -146,6 +158,53 @@ else {
         }
       });
     }
+  });
+  
+  app.get("/api/class-data", function (req, res){
+    res.set('Content-type', 'application/json');
+    
+    res.send(sto.classData);
+  });
+  
+  app.get("/api/relic-data", function (req, res){
+    res.set('Content-type', 'application/json');
+    
+    res.send(sto.relicData);
+  });
+  
+  app.get("/api/combat-data", function (req, res){
+    res.set('Content-type', 'application/json');
+    
+    res.send({
+      dmgMRKE: sto.otherData.dmgMRKE
+    , dmgFTKE: sto.otherData.dmgFTKE
+    , dmgFTIE: sto.otherData.dmgFTIE
+    , timePerSwing: sto.otherData.timePerSwing
+    });
+  });
+  
+  app.get("/api/shield-data", function (req, res){
+    res.set('Content-type', 'application/json');
+    
+    res.send({
+      low: sto.otherData.shieldLow
+    , high: sto.otherData.shieldHigh
+    });
+  });
+  
+  app.get('/:file(*)', function(req, res, next){
+    var file = req.params.file;
+    if (!file) return next();
+    var path = join(__dirname, "static", file);
+    fs.stat(path, function(err, stat){
+      if (err) return next();
+      res.sendfile(path);
+    });
+  });
+
+  // redir / to index.html
+  app.get('/*', function(req, res){
+    res.sendfile(join(__dirname, "static", 'index.html'));
   });
   
   //app.use("/", express.static(join(__dirname, "static")));

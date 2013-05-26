@@ -2,7 +2,7 @@
   "name": "swtor-tanking-site",
   "repo": "swtor-apps/swtor-tanking-site",
   "description": "Site for SW:TOR tanking optimization",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "keywords": [],
   "dependencies": {
     "visionmedia/superagent": "*",
@@ -12,7 +12,9 @@
     "component/each": "*",
     "component/json": "*",
     "component/json-fallback": "*",
-    "necolas/normalize.css": "*"
+    "necolas/normalize.css": "*",
+    "component/notification": "*",
+    "yields/isArray": "*"
   },
   "development": {},
   "license": "MIT",

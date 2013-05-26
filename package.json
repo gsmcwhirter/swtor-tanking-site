@@ -1,6 +1,6 @@
 {
   "name": "swtor-tanking-site",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Site for SW:TOR tanking optimization",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -17,6 +17,7 @@
     "stylus": "~0.32.1",
     "component": "~0.16.0",
     "jade": "~0.30.0",
-    "forever-monitor": "~1.2.2"
+    "forever-monitor": "~1.2.2",
+    "cloneextend": "0.0.3"
   }
 }

@@ -13,7 +13,7 @@
   "readmeFilename": "Readme.md",
   "dependencies": {
     "express": "~3.2.4",
-    "swtor-tanking": "https://github.com/swtor-apps/swtor-tanking/archive/master.tar.gz",
+    "swtor-tanking": "git://github.com/swtor-apps/swtor-tanking.git",
     "stylus": "~0.32.1",
     "component": "~0.16.0",
     "jade": "~0.30.0",

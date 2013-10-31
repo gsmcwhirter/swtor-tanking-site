@@ -156,7 +156,7 @@ else {
           res.send({error: err});
         }
         else {
-          res.send({result: result});
+          res.send({result: result, rdata: relicData});
         }
       });
     }

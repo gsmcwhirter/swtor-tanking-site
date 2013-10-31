@@ -148,6 +148,8 @@ else {
       else if (req.body['stim'] === "reuse_nano"){
         stimValue = 63;
       }
+
+      console.log(relicData);
       
       sto.optimizer.optimize(otherData, sto.classData[req.body['class']], relicData, startingStats, parseInt(req.body['armorRating'], 10), stimValue, function (err, result){
         if (err){
